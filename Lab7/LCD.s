@@ -62,8 +62,8 @@ writecommand
 ;6) If bit 4 is high, loop back to step 5 (wait for BUSY bit to be low)
 
 ;1) read SSIO_SR_R and check bit 4
-CHECK		LDR			R2, =SSI0_SR_R  ; load address of SSIO_SR_R
-			LDR         R1, [R2]         ; read the value in SSIO_SR_R into R1
+CHECK			LDR			R2, =SSI0_SR_R   ; load address of SSIO_SR_R
+			LDR         		R1, [R2]         ; read the value in SSIO_SR_R into R1
 			AND			R2, R1, #0x00000010
 			CMP			R2, #0
 			
@@ -72,8 +72,8 @@ CHECK		LDR			R2, =SSI0_SR_R  ; load address of SSIO_SR_R
 			
 ;3) Clear D/C= PA6 to zero
 			LDR			R2, =0x40004100
-			MOV			R3, #0
-			STR			R3, [R2]
+			MOV			R3, #0          ; assign value to R3
+			STR			R3, [R2]	; give the value in R3 to R2
 
 ;4) Write the command to SSI0_DR_R
 			LDR			R2, =SSI0_DR_R
@@ -82,7 +82,7 @@ CHECK		LDR			R2, =SSI0_SR_R  ; load address of SSIO_SR_R
 
 ;5) Read SSI0_SR_R and check bit 4
 
-CHECK2		LDR			R2, =SSI0_SR_R
+CHECK2			LDR			R2, =SSI0_SR_R
 			LDR			R1, [R2]
 			AND			R2, R1, #0x00000010
 			CMP			R2, #0
@@ -90,7 +90,7 @@ CHECK2		LDR			R2, =SSI0_SR_R
 ;6) If bit 4 is high, loop back to step 5 (wait for BUSY bit to be low)
 
 			BNE			CHECK2
-			BX 		    LR                ;   return
+			BX 		   	 LR                ;   return
 
 ; This is a helper function that sends an 8-bit data to the LCD.
 ; Input: R0  8-bit data to transmit
@@ -105,7 +105,7 @@ writedata
 
 
 ;1) Read SSI0_SR_R and check bit 1,
-CHECK3		LDR 		R2, =SSI0_SR_R
+CHECK3			LDR 			R2, =SSI0_SR_R
 			LDR			R1, [R2]
 			AND			R2, R1, #0x02
 			CMP			R2, #0
@@ -117,8 +117,8 @@ CHECK3		LDR 		R2, =SSI0_SR_R
 			
 ;3) Set D/C=PA6 to one
 
-			LDR 		R2, =0x40004100
-			MOV			R3, #0x40
+			LDR 			R2, =0x40004100
+			MOV			R3, #0x40  ; set bit 6 to 1 , 2 power of (6-4) equal to 4 
 			STR			R3, [R2]
 			
 ;4) Write the 8-bit data to SSI0_DR_R

@@ -1,6 +1,6 @@
 ; LCD.s
 ; Student names: Yang, Tsung-Hsien
-; Last modification date: 01.08.200
+; Last modification date: 19.09.200
 
 ; Runs on TM4C123
 ; Use SSI0 to send an 8-bit code to the ST7735 160x128 pixel LCD.
